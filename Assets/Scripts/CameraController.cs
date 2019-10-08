@@ -17,7 +17,8 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = PlayerController.instance.transform;
+        //target = PlayerController.instance.transform;
+        target = FindObjectOfType<PlayerController>().transform;
 
         //keep the camera inside the map
         halfHeight = Camera.main.orthographicSize;

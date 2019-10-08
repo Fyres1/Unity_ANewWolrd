@@ -18,13 +18,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(instance == null) 
-        { 
+        if (instance == null)
+        {
             instance = this;
         }
         else
         {
-            Destroy(gameObject);
+            if (instance != this) 
+            {
+                Destroy(gameObject);
+            }
         }
 
         DontDestroyOnLoad(gameObject);
