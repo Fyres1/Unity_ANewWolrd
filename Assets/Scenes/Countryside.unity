@@ -232,7 +232,7 @@ Transform:
   - {fileID: 1582115040}
   - {fileID: 1657286642}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1092067256
 PrefabInstance:
@@ -284,7 +284,7 @@ PrefabInstance:
     - target: {fileID: 3543954459459651853, guid: 9377c8e14b6395042864f2f6a36c0d96,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3543954459459651853, guid: 9377c8e14b6395042864f2f6a36c0d96,
         type: 3}
@@ -301,6 +301,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3543954459459652083, guid: 9377c8e14b6395042864f2f6a36c0d96,
+        type: 3}
+      propertyPath: theMap
+      value: 
+      objectReference: {fileID: 1582115042}
     - target: {fileID: 3543954459459652082, guid: 9377c8e14b6395042864f2f6a36c0d96,
         type: 3}
       propertyPath: m_BackGroundColor.r
@@ -316,11 +321,6 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.b
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3543954459459652083, guid: 9377c8e14b6395042864f2f6a36c0d96,
-        type: 3}
-      propertyPath: theMap
-      value: 
-      objectReference: {fileID: 1582115042}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9377c8e14b6395042864f2f6a36c0d96, type: 3}
 --- !u!1 &1582115039
@@ -13489,6 +13489,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -1.44
       objectReference: {fileID: 0}
+    - target: {fileID: 7063191172173216996, guid: b1eefe21dcb07a44daeb361f12aadc50,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063191172173216996, guid: b1eefe21dcb07a44daeb361f12aadc50,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977488706800483265, guid: b1eefe21dcb07a44daeb361f12aadc50,
+        type: 3}
+      propertyPath: areaToLoad
+      value: Town
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977488706800483265, guid: b1eefe21dcb07a44daeb361f12aadc50,
+        type: 3}
+      propertyPath: areaTransitionName
+      value: Countryside-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623583167405517386, guid: b1eefe21dcb07a44daeb361f12aadc50,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1eefe21dcb07a44daeb361f12aadc50, type: 3}
 --- !u!1001 &1944550914
@@ -13546,7 +13571,7 @@ PrefabInstance:
     - target: {fileID: 7348819881631466034, guid: 605704271d394b348ade674f51409729,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7348819881631466034, guid: 605704271d394b348ade674f51409729,
         type: 3}
