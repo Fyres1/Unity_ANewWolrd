@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //stop player from moving during load, open menu or during dialogs with npcs
         if(gameMenuOpen || dialogActive || fadingBetweenAreas)
         {
             PlayerController.instance.canMove = false;
@@ -33,6 +34,15 @@ public class GameManager : MonoBehaviour
         else
         {
             PlayerController.instance.canMove = true;
+        }
+        //test to add/remove item in item menu by pressing J
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            AddItem("Iron Armor");
+            AddItem("Blabla");
+
+            RemoveItem("Health Potion");
+            RemoveItem("Bleep");
         }
     }
 
@@ -53,6 +63,7 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
+    // sort items at the beginning of the array
     public void SortItems()
     {
         bool itemAfterSpace = true;
@@ -76,6 +87,81 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void AddItem(string itemToAdd)
+    {
+        int newItemPosition = 0;
+        bool foundSpace = false;
+
+        for(int i = 0; i < itemHeld.Length; i++)
+        {
+            if(itemHeld[i] == "" || itemHeld[i] == itemToAdd)
+            {
+                newItemPosition = i;
+                i = itemHeld.Length;
+                foundSpace = true;
+            }
+        }
+
+        if (foundSpace)
+        {
+            bool itemExists = false;
+            for(int i = 0; i < referenceItems.Length; i++)
+            {
+                if(referenceItems[i].itemName == itemToAdd)
+                {
+                    itemExists = true;
+
+                    i = referenceItems.Length;
+                }
+            }
+
+            if (itemExists)
+            {
+                itemHeld[newItemPosition] = itemToAdd;
+                numberOfItems[newItemPosition]++;
+            }
+            else
+            {
+                Debug.LogError(itemToAdd + " Does Not Exist!!");
+            }
+        }
+
+        GameMenu.instance.ShowItems();
+    }
+
+    public void RemoveItem(string itemToRemove)
+    {
+        bool foundItem = false;
+        int itemPosition = 0;
+
+        for(int i = 0; i < itemHeld.Length; i++)
+        {
+            if(itemHeld[i] == itemToRemove)
+            {
+                foundItem = true;
+                itemPosition = i;
+
+                i = itemHeld.Length;
+            }
+        }
+
+        if (foundItem)
+        {
+            numberOfItems[itemPosition]--;
+
+            if(numberOfItems[itemPosition] <= 0)
+            {
+                itemHeld[itemPosition] = "";
+            }
+
+            GameMenu.instance.ShowItems();
+        }
+        else
+        {
+            Debug.LogError("Couldn't find " + itemToRemove);
         }
     }
 }

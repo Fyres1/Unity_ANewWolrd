@@ -30,7 +30,7 @@ public class DialogManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //stop dialog if it reach end of array
         if (dialogBox.activeInHierarchy)
         {
             if (Input.GetButtonUp("Fire1"))
@@ -60,6 +60,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    //active dialog with npc or read signs if player is in the trigger zone and left click
     public void ShowDialog(string[] newLines, bool isPerson)
     {
         dialogLines = newLines;
@@ -78,6 +79,7 @@ public class DialogManager : MonoBehaviour
         GameManager.instance.dialogActive = true;
     }
 
+    //Change speaker's name for any line starting with n-
     public void CheckIfName()
     {
         if (dialogLines[currentLine].StartsWith("n-"))

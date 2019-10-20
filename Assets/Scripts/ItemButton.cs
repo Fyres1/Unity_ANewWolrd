@@ -21,4 +21,13 @@ public class ItemButton : MonoBehaviour
     {
         
     }
+
+    public void Press()
+    {
+        //active function if clicked item button isn't empty
+        if(GameManager.instance.itemHeld[buttonValue] != "")
+        {
+            GameMenu.instance.SelectItem(GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[buttonValue]));
+        }
+    }
 }

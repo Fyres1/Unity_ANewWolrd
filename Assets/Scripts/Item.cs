@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    //to create any items needed for the game
     [Header("Item Type")]
     public bool isItem;
     public bool isWeapon;

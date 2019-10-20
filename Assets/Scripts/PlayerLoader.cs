@@ -9,6 +9,7 @@ public class PlayerLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //create a player in the map if no player exist
         if(PlayerController.instance == null)
         {
             Instantiate(player);
