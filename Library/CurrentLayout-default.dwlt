@@ -70,10 +70,10 @@ MonoBehaviour:
     y: 0
     width: 244
     height: 731
-  m_MinSize: {x: 244, y: 444}
-  m_MaxSize: {x: 4004, y: 8044}
+  m_MinSize: {x: 244, y: 422}
+  m_MaxSize: {x: 4004, y: 8022}
   vertical: 1
-  controlID: 103
+  controlID: 81
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 957, y: 444}
   m_MaxSize: {x: 22012, y: 10022}
   vertical: 0
-  controlID: 174
+  controlID: 186
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -212,8 +212,8 @@ MonoBehaviour:
     y: 0
     width: 244
     height: 345
-  m_MinSize: {x: 204, y: 222}
-  m_MaxSize: {x: 4004, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -290,8 +290,8 @@ MonoBehaviour:
     y: 0
     width: 632
     height: 375
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 222}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -317,8 +317,8 @@ MonoBehaviour:
     y: 375
     width: 632
     height: 356
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 222}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 21576
+  m_LastSelectedObjectID: -6728
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -512,9 +512,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 48540000
-      m_LastClickedID: 21576
-      m_ExpandedIDs: 50faffff6afbffff38540000
+      m_SelectedIDs: b8e5ffff
+      m_LastClickedID: -6728
+      m_ExpandedIDs: 30fbffff6afbffff22540000ec540000d4550000a8560000ea57000062580000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -615,20 +615,20 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Prefabs/Items
   m_ViewMode: 1
-  m_StartGridSize: 64
+  m_StartGridSize: 62
   m_LastFolders:
-  - Assets/Scripts
-  m_LastFoldersGridSize: -1
+  - Assets/Prefabs/Items
+  m_LastFoldersGridSize: 62
   m_LastProjectPath: C:\Users\Alexa\Unity\A new world
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ac480000
-    m_LastClickedID: 18604
-    m_ExpandedIDs: 00000000442d0000b649000000ca9a3b
+    m_SelectedIDs: 14330000
+    m_LastClickedID: 13076
+    m_ExpandedIDs: 00000000662d0000d62f000036410000ba480000ea49000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -644,7 +644,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 10}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -656,7 +656,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000442d0000b6490000
+    m_ExpandedIDs: 00000000662d0000d62f0000ba480000ea490000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -683,8 +683,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: 9e300000
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: 9e300000a6440000e04700004a49000000000000aa3e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -709,7 +709,7 @@ MonoBehaviour:
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
     m_ScrollPosition: {x: 0, y: 0}
-    m_GridSize: 64
+    m_GridSize: 62
   m_SkipHiddenPackages: 1
   m_DirectoriesAreaWidth: 134
 --- !u!114 &20
@@ -742,17 +742,17 @@ MonoBehaviour:
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 05000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 07000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -284.4
-    m_HBaseRangeMax: 284.4
-    m_VBaseRangeMin: -160
-    m_VBaseRangeMax: 160
+    m_HBaseRangeMin: -768
+    m_HBaseRangeMax: 768
+    m_VBaseRangeMin: -432
+    m_VBaseRangeMax: 432
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -772,7 +772,7 @@ MonoBehaviour:
       y: 17
       width: 632
       height: 320
-    m_Scale: {x: 1, y: 1}
+    m_Scale: {x: 0.37037036, y: 0.37037036}
     m_Translation: {x: 316, y: 160}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -780,12 +780,12 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -316
-      y: -160
-      width: 632
-      height: 320
+      x: -853.2
+      y: -432
+      width: 1706.4
+      height: 864
     m_MinimalGUI: 1
-  m_defaultScale: 1
+  m_defaultScale: 0.37037036
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
   m_LastWindowPixelSize: {x: 790, y: 421.25}
@@ -829,9 +829,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.017139, y: 7.5363154, z: -44.085938}
+    m_Target: {x: 944.0658, y: 552.73615, z: -379}
     speed: 2
-    m_Value: {x: -1.017139, y: 7.5363154, z: -44.085938}
+    m_Value: {x: 944.0658, y: 552.73615, z: -379}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -856,17 +856,17 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     zGrid:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
   m_Rotation:
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 19.19287
+    m_Target: 1027.0482
     speed: 2
-    m_Value: 19.19287
+    m_Value: 1027.0482
   m_Ortho:
     m_Target: 1
     speed: 2
