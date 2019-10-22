@@ -29,5 +29,10 @@ public class ItemButton : MonoBehaviour
         {
             GameMenu.instance.SelectItem(GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[buttonValue]));
         }
+        else
+        {
+            GameMenu.instance.itemName.text = "";
+            GameMenu.instance.itemDescription.text = "";
+        }
     }
 }

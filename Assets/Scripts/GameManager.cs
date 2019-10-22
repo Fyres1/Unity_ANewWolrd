@@ -15,12 +15,16 @@ public class GameManager : MonoBehaviour
     public int[] numberOfItems;
     public Item[] referenceItems;
 
+    public int currentGold;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        SortItems();
     }
 
     // Update is called once per frame
@@ -155,6 +159,8 @@ public class GameManager : MonoBehaviour
             if(numberOfItems[itemPosition] <= 0)
             {
                 itemHeld[itemPosition] = "";
+                GameMenu.instance.itemName.text = "";
+                GameMenu.instance.itemDescription.text = "";
             }
 
             GameMenu.instance.ShowItems();
