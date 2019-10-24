@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public CharStats[] playerStats;
 
-    public bool gameMenuOpen, dialogActive, fadingBetweenAreas;
+    public bool gameMenuOpen, dialogActive, fadingBetweenAreas, shopActive;
 
     public string[] itemHeld;
     public int[] numberOfItems;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //stop player from moving during load, open menu or during dialogs with npcs
-        if(gameMenuOpen || dialogActive || fadingBetweenAreas)
+        if(gameMenuOpen || dialogActive || fadingBetweenAreas || shopActive)
         {
             PlayerController.instance.canMove = false;
         }
