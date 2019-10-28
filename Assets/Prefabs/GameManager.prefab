@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6519432737589780556}
   - component: {fileID: 6519432737589780557}
+  - component: {fileID: 2004617392}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   gameMenuOpen: 0
   dialogActive: 0
   fadingBetweenAreas: 0
+  shopActive: 0
   itemHeld:
   - 
   - 
@@ -102,6 +104,26 @@ MonoBehaviour:
   - {fileID: 5171622388645781409, guid: 94dfa76b06ca6764a90281a486772bd2, type: 3}
   - {fileID: 3105781087782854996, guid: e876fd55fe7cb8946b40af5b2f1b5e88, type: 3}
   - {fileID: 4929132332826090311, guid: 4e75afa93e982164ab9bb4e2d3aa5016, type: 3}
+  currentGold: 0
+--- !u!114 &2004617392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519432737589780562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d009c1ccf63a874bbef38cc2cce18e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questMarkerNames:
+  - 
+  - fight the demon
+  - enter the cave
+  - quest test
+  - save the world
+  questMarkersComplete: 
 --- !u!1 &6519432737666699517
 GameObject:
   m_ObjectHideFlags: 0

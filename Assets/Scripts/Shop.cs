@@ -33,6 +33,7 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //test
         if(Input.GetKeyDown(KeyCode.K) && !shopMenu.activeInHierarchy)
         {
             OpenShop();
