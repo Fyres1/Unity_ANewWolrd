@@ -275,6 +275,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6228345080104603187, guid: ea24eb601bfd3a64db12eca1f6aa70c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6228345079907169347, guid: ea24eb601bfd3a64db12eca1f6aa70c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -888,7 +893,7 @@ PrefabInstance:
     - target: {fileID: 4977488706800483265, guid: b1eefe21dcb07a44daeb361f12aadc50,
         type: 3}
       propertyPath: areaTransitionName
-      value: Town 2
+      value: Shop-1
       objectReference: {fileID: 0}
     - target: {fileID: 3623583167405517386, guid: b1eefe21dcb07a44daeb361f12aadc50,
         type: 3}
@@ -974,6 +979,11 @@ PrefabInstance:
       propertyPath: theMap
       value: 
       objectReference: {fileID: 2184113939093010495}
+    - target: {fileID: 3543954459459652083, guid: 9377c8e14b6395042864f2f6a36c0d96,
+        type: 3}
+      propertyPath: musicToPlay
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9377c8e14b6395042864f2f6a36c0d96, type: 3}
 --- !u!1001 &2184113939093010493
