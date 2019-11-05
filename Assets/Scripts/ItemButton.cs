@@ -24,10 +24,33 @@ public class ItemButton : MonoBehaviour
 
     public void Press()
     {
-        //active function if clicked item button isn't empty
-        if(GameManager.instance.itemHeld[buttonValue] != "")
+        if (GameMenu.instance.theMenu.activeInHierarchy)
         {
-            GameMenu.instance.SelectItem(GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[buttonValue]));
+
+            //active function if clicked item button isn't empty
+            if (GameManager.instance.itemHeld[buttonValue] != "")
+            {
+                GameMenu.instance.SelectItem(GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[buttonValue]));
+            }
+            else
+            {
+                GameMenu.instance.itemName.text = "";
+                GameMenu.instance.itemDescription.text = "";
+            }
         }
+
+        if (Shop.instance.shopMenu.activeInHierarchy)
+        {
+            if (Shop.instance.buyMenu.activeInHierarchy)
+            {
+                Shop.instance.SelectBuyItem(GameManager.instance.GetItemDetails(Shop.instance.itemsForSale[buttonValue]));
+            }
+
+            if (Shop.instance.sellMenu.activeInHierarchy)
+            {
+                Shop.instance.SelectSellItem(GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[buttonValue]));
+            }
+        }
+        
     }
 }
