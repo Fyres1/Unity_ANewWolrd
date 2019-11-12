@@ -451,6 +451,30 @@ MonoBehaviour:
   - {fileID: 5860838736380689365, guid: 5f381d175e8538d4b9929aadafdaabfd, type: 3}
   - {fileID: 955300990077693885, guid: 1aae8e676de43214fa25aea44fe3815b, type: 3}
   activeBattlers: []
+  currentTurn: 0
+  turnWaiting: 0
+  uiButtonsHolder: {fileID: 1008938221}
+  movesList:
+  - moveName: Slash
+    movePower: 40
+    moveCost: 0
+    theEffect: {fileID: 8714183737735417686, guid: fb5e0aade0b271c4ba04a91eb780b71a,
+      type: 3}
+  - moveName: Fire
+    movePower: 50
+    moveCost: 5
+    theEffect: {fileID: 7652577353165215085, guid: 1db491b581fe0074399641d4adc79099,
+      type: 3}
+  - moveName: Ice
+    movePower: 65
+    moveCost: 5
+    theEffect: {fileID: 8835957834253456224, guid: 23d4beabd2e731443bac2a99cb9b23ec,
+      type: 3}
+  - moveName: Plasma
+    movePower: 85
+    moveCost: 10
+    theEffect: {fileID: 2215705624729613402, guid: f6c31d57119a9ac49bf183bf54af7df2,
+      type: 3}
 --- !u!4 &188983304
 Transform:
   m_ObjectHideFlags: 0

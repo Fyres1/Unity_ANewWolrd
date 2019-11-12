@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //stop player from moving during load, open menu or during dialogs with npcs
+        //stop player from moving during load, open menu, during dialogs with npcs, shop and battles
         if(gameMenuOpen || dialogActive || fadingBetweenAreas || shopActive || battleActive)
         {
             PlayerController.instance.canMove = false;

@@ -94,7 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  movesAvailable: []
+  movesAvailable:
+  - Slash
+  - Plasma
   charName: Spider
   currentHp: 175
   maxHP: 200

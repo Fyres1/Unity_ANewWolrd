@@ -19,6 +19,14 @@ public class BattleManager : MonoBehaviour
 
     public List<BattleChar> activeBattlers = new List<BattleChar>();
 
+    public int currentTurn;
+    public bool turnWaiting;
+
+    public GameObject uiButtonsHolder;
+
+    public BattleMove[] movesList;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +40,29 @@ public class BattleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             BattleStart(new string[] { "Eyeball", "Spider", "Skeleton"});
+        }
+
+        if (battleActive)
+        {
+            if (turnWaiting)
+            {
+                if (activeBattlers[currentTurn].isPlayer)
+                {
+                    uiButtonsHolder.SetActive(true);
+                }
+                else
+                {
+                    uiButtonsHolder.SetActive(false);
+
+                    //enemy should attack
+                    StartCoroutine(EnemyMoveCo());
+                }
+            }
+            //test
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                NextTurn();
+            }
         }
     }
 
@@ -90,6 +121,103 @@ public class BattleManager : MonoBehaviour
                         }
                     }
                 }
+            }
+
+            turnWaiting = true;
+            //randomise 1st turn in battle between active players & enemies
+            currentTurn = Random.Range(0, activeBattlers.Count);
+        }
+    }
+
+    public void NextTurn()
+    {
+        currentTurn++;
+        if(currentTurn >= activeBattlers.Count)
+        {
+            currentTurn = 0;
+        }
+
+        turnWaiting = true;
+
+        UpdateBattle();
+    }
+
+    public void UpdateBattle()
+    {
+        bool allEnemiesDead = true;
+        bool allPlayersDead = true;
+
+        for(int i = 0; i < activeBattlers.Count; i++)
+        {
+            if(activeBattlers[i].currentHp < 0)
+            {
+                activeBattlers[i].currentHp = 0;
+            }
+
+            if(activeBattlers[i].currentHp == 0)
+            {
+                //handle dead battlers
+            }
+            else
+            {
+                if (activeBattlers[i].isPlayer)
+                {
+                    allPlayersDead = false;
+                }
+                else
+                {
+                    allEnemiesDead = false;
+                }
+            }
+        }
+
+        if(allEnemiesDead || allPlayersDead)
+        {
+            if (allEnemiesDead)
+            {
+                //end battle in victory
+            }
+            else
+            {
+                //end battle in failure
+            }
+
+            battleScene.SetActive(false);
+            GameManager.instance.battleActive = false;
+            battleActive = false;
+        }
+    }
+    //slow down game speed for enemies.
+    public IEnumerator EnemyMoveCo()
+    {
+        turnWaiting = false;
+        yield return new WaitForSeconds(1f);
+        EnemyAttack();
+        yield return new WaitForSeconds(1f);
+        NextTurn();
+    }
+
+    public void EnemyAttack()
+    {
+        //Search players still alive and positions in battle and select one to attack
+        List<int> players = new List<int>();
+        for(int i =0; i < activeBattlers.Count; i++)
+        {
+            if(activeBattlers[i].isPlayer && activeBattlers[i].currentHp > 0)
+            {
+                players.Add(i);
+            }
+        }
+        int selectedTarget = players[Random.Range(0, players.Count)];
+
+        //activeBattlers[selectedTarget].currentHp -= 30;
+
+        int selectAttack = Random.Range(0, activeBattlers[currentTurn].movesAvailable.Length);
+        for(int i = 0; i < movesList.Length; i++)
+        {
+            if(movesList[i].moveName == activeBattlers[currentTurn].movesAvailable[selectAttack])
+            {
+                Instantiate(movesList[i].theEffect, activeBattlers[selectedTarget].transform.position, activeBattlers[selectedTarget].transform.rotation);
             }
         }
     }
