@@ -10,6 +10,11 @@ public class BattleItemSelect : MonoBehaviour
     public int itemHeld;
     public Text nameText;
     public Text numberText;
+    public int buttonValue;
+    public int amountToChange;
+
+    public int activeBattlerTarget;
+    public Text targetName;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +30,13 @@ public class BattleItemSelect : MonoBehaviour
 
     public void Press()
     {
-        BattleManager.instance.itemMenu.SetActive(false);
-        BattleManager.instance.OpenPlayerTargetMenu(itemName);
+        if (BattleManager.instance.itemMenu.activeInHierarchy)
+        {
+            BattleManager.instance.SelectUseItem(GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[buttonValue]));
+            BattleManager.instance.itemMenu.SetActive(false);
+            BattleManager.instance.OpenPlayerTargetMenu(itemName);
+            
+            //BattleManager.instance.HealItem(itemName, activeBattlerTarget);
+        }
     }
 }

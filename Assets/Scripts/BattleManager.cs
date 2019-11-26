@@ -35,12 +35,19 @@ public class BattleManager : MonoBehaviour
     public GameObject targetMenu;
     public BattleTargetButton[] targetButtons;
 
+    public GameObject targetHealMenu;
+    public BattleHealTargetButton[] targetHealButtons;
+
     public GameObject magicMenu;
     public BattleMagicSelect[] magicButtons;
 
     public GameObject itemMenu;
     public BattleItemSelect[] itemButtons;
     public Item activeItem;
+    public string itemName;
+    //public Text itemName;
+    public int buttonValue;
+    public int amountToChange;
 
     public BattleNotification battleNotice;
 
@@ -179,7 +186,17 @@ public class BattleManager : MonoBehaviour
                 activeBattlers[i].currentHp = 0;
             }
 
-            if(activeBattlers[i].currentHp == 0)
+            if(activeBattlers[i].currentHp > activeBattlers[i].maxHP)
+            {
+                activeBattlers[i].currentHp = activeBattlers[i].maxHP;
+            }
+
+            if (activeBattlers[i].currentMP > activeBattlers[i].maxMP)
+            {
+                activeBattlers[i].currentMP = activeBattlers[i].maxMP;
+            }
+
+            if (activeBattlers[i].currentHp == 0)
             {
                 //handle dead battlers
             }
@@ -366,7 +383,8 @@ public class BattleManager : MonoBehaviour
 
     public void OpenPlayerTargetMenu(string itemName)
     {
-        targetMenu.SetActive(true);
+        //Debug.Log(itemName);
+        targetHealMenu.SetActive(true);
 
         List<int> Allies = new List<int>();
         for (int i = 0; i < activeBattlers.Count; i++)
@@ -377,19 +395,19 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < targetButtons.Length; i++)
+        for (int i = 0; i < targetHealButtons.Length; i++)
         {
             if (Allies.Count > i)
             {
-                targetButtons[i].gameObject.SetActive(true);
+                targetHealButtons[i].gameObject.SetActive(true);
 
-                targetButtons[i].moveName = itemName;
-                targetButtons[i].activeBattlerTarget = Allies[i];
-                targetButtons[i].targetName.text = activeBattlers[Allies[i]].charName;
+                targetHealButtons[i].moveName = itemName;
+                targetHealButtons[i].activeBattlerTarget = Allies[i];
+                targetHealButtons[i].targetName.text = activeBattlers[Allies[i]].charName;
             }
             else
             {
-                targetButtons[i].gameObject.SetActive(false);
+                targetHealButtons[i].gameObject.SetActive(false);
             }
         }
     }
@@ -452,22 +470,85 @@ public class BattleManager : MonoBehaviour
             {
                 itemButtons[i].itemName = GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[i]).itemName;
                 itemButtons[i].nameText.text = GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[i]).itemName;
+                itemButtons[i].amountToChange = GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[i]).amountToChange;
                 itemButtons[i].numberText.text = GameManager.instance.numberOfItems[i].ToString();
             }
             else
             {
                 itemButtons[i].gameObject.SetActive(false);
                 itemButtons[i].nameText.text = "";
+                itemButtons[i].amountToChange = 0;
                 itemButtons[i].numberText.text = "";
             }
         }
     }
 
-    //public void SelectUseItem(Item useItem)
-    //{
-    //    selectedItem = useItem;
-    //    useItemName.text = selectedItem.itemName;
-    //    useItemDescription.text = selectedItem.description;
-    //    //useItemValue.text = "Value " + Mathf.FloorToInt(selectedItem.value * .5f).ToString() + "g";
-    //}
+    public void SelectUseItem(Item useItem)
+    {
+        activeItem = useItem;
+        //Debug.Log(useItem);
+        itemName = activeItem.itemName;
+        amountToChange = activeItem.amountToChange;
+        //useItemDescription.text = activeItem.description;
+    }
+
+    public void HealItem(string itemName, int selectedTarget)
+    {
+        Debug.Log("The item is " + itemName + " used for " + selectedTarget);
+        int healPower = 0;
+        for (int i = 0; i < itemButtons.Length; i++)
+        {
+            if (itemButtons[i].itemName == itemName)
+            {
+                //Instantiate(itemButtons[i].theEffect, activeBattlers[selectedTarget].transform.position, activeBattlers[selectedTarget].transform.rotation);
+                healPower = itemButtons[i].amountToChange;
+            }
+        }
+        //Attack effect to show who attack
+        Instantiate(enemyAttackEffect, activeBattlers[currentTurn].transform.position, activeBattlers[currentTurn].transform.rotation);
+
+        GameManager.instance.RemoveItem(itemName);
+        HealDamage(selectedTarget, healPower);
+        
+        //uiButtonsHolder.SetActive(false);
+        //targetHealMenu.SetActive(false);
+
+        //NextTurn();
+    }
+
+    public void HealDamage(int target, int healPower)
+    {
+
+        Debug.Log("The target is " + target + " to get " + healPower);
+        for (int i = 0; i < itemButtons.Length; i++)
+        {
+            Item usedItem = (GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[i]));
+            //Debug.Log(usedItem.itemName);
+            //Debug.Log(usedItem.affectHP);
+            //Debug.Log(usedItem.affectMP);
+            if (usedItem.isItem && usedItem.affectHP)
+            {
+                activeBattlers[target].currentHp += healPower;
+                Debug.Log(activeBattlers[currentTurn].charName + " is use item to heal " + healPower + " damage to " + activeBattlers[target].charName);
+                //GameManager.instance.RemoveItem(itemName);
+                uiButtonsHolder.SetActive(false);
+                targetHealMenu.SetActive(false);
+                NextTurn();
+            }
+
+            if (usedItem.isItem && usedItem.affectMP)
+            {
+                activeBattlers[target].currentMP += healPower;
+                Debug.Log(activeBattlers[currentTurn].charName + " is use item to give " + healPower + " mana to " + activeBattlers[target].charName);
+                //GameManager.instance.RemoveItem(itemName);
+                uiButtonsHolder.SetActive(false);
+                targetHealMenu.SetActive(false);
+                NextTurn();
+            }
+        }
+
+        Instantiate(theDamageNumber, activeBattlers[target].transform.position, activeBattlers[target].transform.rotation).SetDamage(healPower);
+
+        UpdateUIStats();
+    }
 }
