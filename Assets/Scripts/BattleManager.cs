@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -52,6 +53,12 @@ public class BattleManager : MonoBehaviour
     public BattleNotification battleNotice;
 
     public int chanceToFlee = 35;
+    private bool fleeing;
+
+    public string gameOverScene;
+
+    public int rewardXP;
+    public string[] rewardItems;
 
     
 
@@ -68,7 +75,7 @@ public class BattleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            BattleStart(new string[] { "Eyeball", "Spider", "Skeleton"});
+            BattleStart(new string[] { "Eyeball"});
         }
 
         if (battleActive)
@@ -181,6 +188,7 @@ public class BattleManager : MonoBehaviour
 
         for(int i = 0; i < activeBattlers.Count; i++)
         {
+            //Keep players life and mana between 0 and max
             if(activeBattlers[i].currentHp < 0)
             {
                 activeBattlers[i].currentHp = 0;
@@ -199,12 +207,21 @@ public class BattleManager : MonoBehaviour
             if (activeBattlers[i].currentHp == 0)
             {
                 //handle dead battlers
+                if (activeBattlers[i].isPlayer)
+                {
+                    activeBattlers[i].theSprite.sprite = activeBattlers[i].deadSprite;
+                }
+                else
+                {
+                    activeBattlers[i].EnemyFade();
+                }
             }
             else
             {
                 if (activeBattlers[i].isPlayer)
                 {
                     allPlayersDead = false;
+                    activeBattlers[i].theSprite.sprite = activeBattlers[i].aliveSprite;
                 }
                 else
                 {
@@ -218,15 +235,17 @@ public class BattleManager : MonoBehaviour
             if (allEnemiesDead)
             {
                 //end battle in victory
+                StartCoroutine(EndBattleCo());
             }
             else
             {
                 //end battle in failure
+                StartCoroutine(GameOverCo());
             }
 
-            battleScene.SetActive(false);
+            /*battleScene.SetActive(false);
             GameManager.instance.battleActive = false;
-            battleActive = false;
+            battleActive = false;*/
         }
         else
         {
@@ -366,7 +385,7 @@ public class BattleManager : MonoBehaviour
 
         for(int i = 0; i < targetButtons.Length; i++)
         {
-            if(Enemies.Count > i)
+            if(Enemies.Count > i && activeBattlers[Enemies[i]].currentHp > 0)
             {
                 targetButtons[i].gameObject.SetActive(true);
 
@@ -397,7 +416,7 @@ public class BattleManager : MonoBehaviour
 
         for (int i = 0; i < targetHealButtons.Length; i++)
         {
-            if (Allies.Count > i)
+            if (Allies.Count > i && activeBattlers[Allies[i]].currentHp > 0) //Need to set something different to revive dead players.
             {
                 targetHealButtons[i].gameObject.SetActive(true);
 
@@ -448,8 +467,10 @@ public class BattleManager : MonoBehaviour
         if(fleeSuccess < chanceToFlee)
         {
             //end the battle
-            battleActive = false;
-            battleScene.SetActive(false);
+            //battleActive = false;
+            //battleScene.SetActive(false);
+            fleeing = true;
+            StartCoroutine(EndBattleCo());
         }
         else
         {
@@ -508,7 +529,7 @@ public class BattleManager : MonoBehaviour
         Instantiate(enemyAttackEffect, activeBattlers[currentTurn].transform.position, activeBattlers[currentTurn].transform.rotation);
 
         GameManager.instance.RemoveItem(itemName);
-        HealDamage(selectedTarget, healPower);
+        HealDamage(selectedTarget, healPower, itemName);
         
         //uiButtonsHolder.SetActive(false);
         //targetHealMenu.SetActive(false);
@@ -516,39 +537,88 @@ public class BattleManager : MonoBehaviour
         //NextTurn();
     }
 
-    public void HealDamage(int target, int healPower)
+    public void HealDamage(int target, int healPower, string itemName)
     {
+        Debug.Log("The target is " + target + " to get " + healPower + " with " + itemName);
 
-        Debug.Log("The target is " + target + " to get " + healPower);
-        for (int i = 0; i < itemButtons.Length; i++)
-        {
-            Item usedItem = (GameManager.instance.GetItemDetails(GameManager.instance.itemHeld[i]));
-            //Debug.Log(usedItem.itemName);
-            //Debug.Log(usedItem.affectHP);
-            //Debug.Log(usedItem.affectMP);
-            if (usedItem.isItem && usedItem.affectHP)
+            if (itemName == "Health Potion")
             {
                 activeBattlers[target].currentHp += healPower;
-                Debug.Log(activeBattlers[currentTurn].charName + " is use item to heal " + healPower + " damage to " + activeBattlers[target].charName);
-                //GameManager.instance.RemoveItem(itemName);
-                uiButtonsHolder.SetActive(false);
-                targetHealMenu.SetActive(false);
-                NextTurn();
+                Debug.Log(activeBattlers[currentTurn].charName + "  use " + itemName +  " to heal " + healPower + " damage to " + activeBattlers[target].charName);
             }
 
-            if (usedItem.isItem && usedItem.affectMP)
+            if (itemName == "Mana Potion")
             {
                 activeBattlers[target].currentMP += healPower;
-                Debug.Log(activeBattlers[currentTurn].charName + " is use item to give " + healPower + " mana to " + activeBattlers[target].charName);
-                //GameManager.instance.RemoveItem(itemName);
-                uiButtonsHolder.SetActive(false);
-                targetHealMenu.SetActive(false);
-                NextTurn();
+                Debug.Log(activeBattlers[currentTurn].charName + " use " + itemName + " to give " + healPower + " mana to " + activeBattlers[target].charName);
             }
-        }
+        
 
         Instantiate(theDamageNumber, activeBattlers[target].transform.position, activeBattlers[target].transform.rotation).SetDamage(healPower);
-
+        uiButtonsHolder.SetActive(false);
+        targetHealMenu.SetActive(false);
         UpdateUIStats();
+        NextTurn();
+    }
+
+    public IEnumerator EndBattleCo()
+    {
+        //Close battle scene and all active menus
+        battleActive = false;
+        uiButtonsHolder.SetActive(false);
+        targetMenu.SetActive(false);
+        magicMenu.SetActive(false);
+        itemMenu.SetActive(false);
+        targetHealMenu.SetActive(false);
+
+        yield return new WaitForSeconds(.5f);
+
+        UIFade.instance.FadeToBlack();
+
+        yield return new WaitForSeconds(1.5f);
+
+        //Update character HP and MP from the battle to the Menu
+        for(int i = 0; i < activeBattlers.Count; i++)
+        {
+            if (activeBattlers[i].isPlayer)
+            {
+                for(int j = 0; j < GameManager.instance.playerStats.Length; j++)
+                {
+                    if(activeBattlers[i].charName == GameManager.instance.playerStats[j].charName)
+                    {
+                        GameManager.instance.playerStats[j].currentHP = activeBattlers[i].currentHp;
+                        GameManager.instance.playerStats[j].currentMP = activeBattlers[i].currentMP;
+                    }
+                }
+            }
+
+            Destroy(activeBattlers[i].gameObject);
+        }
+
+        UIFade.instance.FadeFromBlack();
+        battleScene.SetActive(false);
+        activeBattlers.Clear();
+        currentTurn = 0;
+        //GameManager.instance.battleActive = false;
+        if (fleeing)
+        {
+            GameManager.instance.battleActive = false;
+            fleeing = false;
+        }
+        else
+        {
+            BattleReward.instance.OpenRewardScreen(rewardXP, rewardItems);
+        }
+
+        AudioManager.instance.PlayBGM(FindObjectOfType<CameraController>().musicToPlay);
+    }
+
+    public IEnumerator GameOverCo()
+    {
+        battleActive = false;
+        UIFade.instance.FadeToBlack();
+        yield return new WaitForSeconds(1.5f);
+        battleScene.SetActive(false);
+        SceneManager.LoadScene(gameOverScene);
     }
 }

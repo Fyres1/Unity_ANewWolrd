@@ -107,3 +107,7 @@ MonoBehaviour:
   wpnPower: 4
   armrPower: 3
   hasDied: 0
+  theSprite: {fileID: 1993012935247338594}
+  deadSprite: {fileID: 0}
+  aliveSprite: {fileID: 0}
+  fadeSpeed: 1
