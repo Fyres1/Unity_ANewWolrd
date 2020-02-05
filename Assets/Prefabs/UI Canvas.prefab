@@ -12395,7 +12395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 33.424988, y: 15}
+  m_AnchoredPosition: {x: 33.424805, y: 15}
   m_SizeDelta: {x: -0.4, y: -847.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &521361687
@@ -24448,7 +24448,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 33.424988, y: 397}
+  m_AnchoredPosition: {x: 33.424805, y: 397}
   m_SizeDelta: {x: -0.4, y: -847.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1078357395
@@ -27905,7 +27905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.7749023, y: 17.599976}
+  m_AnchoredPosition: {x: 2.7749023, y: 17.600098}
   m_SizeDelta: {x: -102.85, y: -114.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1194711800
@@ -33333,7 +33333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 33.424988, y: -180.70001}
+  m_AnchoredPosition: {x: 33.424805, y: -180.69995}
   m_SizeDelta: {x: -0.4, y: -717.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1386701413
@@ -43292,7 +43292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 33.424988, y: 199.52}
+  m_AnchoredPosition: {x: 33.424805, y: 199.52002}
   m_SizeDelta: {x: -0.4, y: -714.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1891693568
@@ -49731,3 +49731,5 @@ MonoBehaviour:
   rewardScreen: {fileID: 1194711797}
   rewardItems: []
   xpEarned: 0
+  markQuestComplete: 0
+  questToMark: 

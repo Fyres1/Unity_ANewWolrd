@@ -16,6 +16,11 @@ public class BattleStarter : MonoBehaviour
     //if you want only 1 battle in that area
     public bool deactivateAfterStarting;
 
+    public bool cannotFlee;
+
+    public bool shouldCompleteQuest;
+    public string questToComplete;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,12 +89,16 @@ public class BattleStarter : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        BattleManager.instance.BattleStart(potentialBattles[selectedBattle].enemies);
+        BattleManager.instance.BattleStart(potentialBattles[selectedBattle].enemies, cannotFlee);
         UIFade.instance.FadeFromBlack();
 
+        //if you want only 1 battle in that area (1 time battle/event)
         if (deactivateAfterStarting)
         {
             gameObject.SetActive(false);
         }
+
+        BattleReward.instance.markQuestComplete = shouldCompleteQuest;
+        BattleReward.instance.questToMark = questToComplete;
     }
 }
